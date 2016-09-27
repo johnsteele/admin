@@ -7,7 +7,12 @@
 <title>Admin Example</title>
 </head>
 <body>
-This will form the example dashboard for admin systems
+<p>
+This will form the example dashboard for admin systems. It is experimental to show some of the
+aspects of developing java based applications and also the use of angular for the front end.
+</p>
+<p>
+To go to the main dashboard click <a href="home">here</a>
 
 </body>
 </html>

@@ -6,14 +6,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by markeastman on 26/09/2016.
  */
 @WebServlet(value="/home", loadOnStartup=1)
-public class HomeServlet extends HttpServlet{
+public class HomeServlet extends HttpServlet {
     @Inject
-    private Application application;
+    private HtmlProducer uiProducer;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -26,16 +28,8 @@ public class HomeServlet extends HttpServlet{
      */
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        application.processRequest(response);
-//        String templatepath = request.getRequestURI().substring(request.getContextPath().length());
-//        // Maps / to index.html
-//        // FIXME: use welcome-file-list in web.xml
-//        if (templatepath.equals("/")) {
-//            templatepath += DEFAULT_PAGE;
-//        }
-//        response.setCharacterEncoding(CHARACTER_ENCODING);
-//        templateengine.process(templatepath,
-//                new WebContext(request, response, getServletContext()),
-//                response.getWriter());
+        Map model = new HashMap();
+        model.put( "username", "Mark Eastman" );
+        uiProducer.processRequest(request,response, "home", request.getLocale(), model);
     }
 }
