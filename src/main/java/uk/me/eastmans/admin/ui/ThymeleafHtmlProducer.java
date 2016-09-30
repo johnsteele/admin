@@ -24,6 +24,7 @@ public class ThymeleafHtmlProducer implements HtmlProducer {
 
     public ThymeleafHtmlProducer()
     {
+        System.out.println( "ThymeleafHtmlProducer constructed");
         // Initialise us to have the sensible defaults
         ServletContextTemplateResolver templateresolver = new ServletContextTemplateResolver();
         templateresolver.setPrefix("/WEB-INF/templates/");
