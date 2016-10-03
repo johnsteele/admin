@@ -12,7 +12,7 @@ This will form the example dashboard for admin systems. It is experimental to sh
 aspects of developing java based applications and also the use of angular for the front end.
 </p>
 <p>
-To go to the main dashboard click <a href="home">here</a>
+To go to the main dashboard click <a href="app/home">here</a>
 
 </body>
 </html>

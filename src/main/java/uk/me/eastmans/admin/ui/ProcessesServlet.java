@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Created by markeastman on 26/09/2016.
  */
-@WebServlet(value="/processes")
+@WebServlet(value="/app/processes")
 public class ProcessesServlet extends HttpServlet {
     @Inject
     private HtmlProducer uiProducer;

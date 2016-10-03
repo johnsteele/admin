@@ -24,7 +24,6 @@ public class ThymeleafHtmlProducer implements HtmlProducer {
 
     public ThymeleafHtmlProducer()
     {
-        System.out.println( "ThymeleafHtmlProducer constructed");
         // Initialise us to have the sensible defaults
         ServletContextTemplateResolver templateresolver = new ServletContextTemplateResolver();
         templateresolver.setPrefix("/WEB-INF/templates/");
@@ -36,6 +35,16 @@ public class ThymeleafHtmlProducer implements HtmlProducer {
         templateengine = new TemplateEngine();
         templateengine.setTemplateResolver(templateresolver);
         templateengine.initialize();
+    }
+
+    @Override
+    public void processRequest(HttpServletRequest request, HttpServletResponse response, String templateName,
+                               Locale locale) throws IOException{
+        response.setCharacterEncoding(CHARACTER_ENCODING);
+        templateengine.process(templateName,
+                new WebContext(request, response, request.getServletContext(), locale),
+                response.getWriter());
+
     }
 
     @Override

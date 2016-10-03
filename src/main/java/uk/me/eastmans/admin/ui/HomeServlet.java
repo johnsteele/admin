@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Created by markeastman on 26/09/2016.
  */
-@WebServlet(value="/home")
+@WebServlet(value="/app/home")
 public class HomeServlet extends HttpServlet {
     @Inject
     private HtmlProducer uiProducer;
@@ -26,10 +26,6 @@ public class HomeServlet extends HttpServlet {
     @Inject
     private PersonService personService;
 
-    public HomeServlet()
-    {
-        System.out.println( "HomeServlet created " + uiProducer );
-    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {

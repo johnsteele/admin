@@ -11,5 +11,8 @@ import java.util.Map;
  */
 public interface HtmlProducer {
     public void processRequest(HttpServletRequest request, HttpServletResponse response, String templateName,
+                               Locale locale) throws IOException;
+
+    public void processRequest(HttpServletRequest request, HttpServletResponse response, String templateName,
                                Locale locale, Map attributes) throws IOException;
 }
