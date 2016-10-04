@@ -42,8 +42,7 @@ public class ThymeleafHtmlProducer implements HtmlProducer {
                                Locale locale) throws IOException{
         response.setCharacterEncoding(CHARACTER_ENCODING);
         templateengine.process(templateName,
-                new WebContext(request, response, request.getServletContext(), locale),
-                response.getWriter());
+                new WebContext(request, response, request.getServletContext(), locale),response.getWriter());
 
     }
 
@@ -52,8 +51,23 @@ public class ThymeleafHtmlProducer implements HtmlProducer {
                                Locale locale, Map attributes) throws IOException{
         response.setCharacterEncoding(CHARACTER_ENCODING);
         templateengine.process(templateName,
-              new WebContext(request, response, request.getServletContext(), locale, attributes),
-              response.getWriter());
+              new WebContext(request, response, request.getServletContext(), locale, attributes),response.getWriter());
+
+    }
+
+    @Override
+    public String process(HttpServletRequest request, HttpServletResponse response, String templateName, Map attributes) throws IOException{
+        response.setCharacterEncoding(CHARACTER_ENCODING);
+        return templateengine.process(templateName,
+                new WebContext(request, response, request.getServletContext(), request.getLocale(), attributes));
+
+    }
+
+    @Override
+    public String process(HttpServletRequest request, HttpServletResponse response, String templateName) throws IOException{
+        response.setCharacterEncoding(CHARACTER_ENCODING);
+        return templateengine.process(templateName,
+                new WebContext(request, response, request.getServletContext(), request.getLocale()));
 
     }
 }

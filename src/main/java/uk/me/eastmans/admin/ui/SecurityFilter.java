@@ -28,7 +28,7 @@ public class SecurityFilter implements Filter{
         String uri = req.getRequestURI();
         System.out.println( "Requested URI is " + uri );
 
-        if (uri.startsWith("/app/login"))
+        if (uri.startsWith("/app/login") || uri.startsWith("/app/authenticate"))
         {
             // Just route it on
             filterChain.doFilter(servletRequest, servletResponse);

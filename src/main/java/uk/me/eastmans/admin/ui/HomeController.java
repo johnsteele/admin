@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,24 +23,24 @@ import java.util.Map;
 /**
  * Created by markeastman on 26/09/2016.
  */
-@WebServlet(value="/app/home")
-public class HomeServlet extends HttpServlet {
+@Path("home")
+public class HomeController {
     @Inject
     private HtmlProducer uiProducer;
 
     @Inject
     private PersonService personService;
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public String home(@Context HttpServletRequest request, @Context HttpServletResponse response )
             throws IOException {
 
         checkDatabase();
 
         Map model = new HashMap();
         model.put( "username", "Mark Eastman" );
-        uiProducer.processRequest(request,response, "home", request.getLocale(), model);
-
+        return uiProducer.process(request,response, "home", model);
     }
 
     public void checkDatabase()
