@@ -27,7 +27,7 @@ public class PersonService {
         personRepository.create(person);
         System.out.println("ana has id " + person.getId());
 
-        Person p = personRepository.findWithId(1);
+        Person p = personRepository.read(1);
         System.out.println("Person with id=1 is " + p.getFirstName());
     }
 }

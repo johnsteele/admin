@@ -14,6 +14,6 @@ import javax.transaction.Transactional;
 public class PersonRepository extends CRUDRepository<Person,Integer> {
     public PersonRepository()
     {
-        super(Person.class);
+        super(Person.class); // I cant find a way to do this in the super class
     }
 }

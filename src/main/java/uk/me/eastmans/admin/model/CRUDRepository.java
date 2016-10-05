@@ -25,8 +25,18 @@ public abstract class CRUDRepository<T,I> {
         em.persist(entity);
     }
 
-    public T findWithId(I id)
+    public T read(I id)
     {
         return (T)em.find(entityType,id);
+    }
+
+    public void update(T entity)
+    {
+        em.persist(entity);
+    }
+
+    public void delete(T entity)
+    {
+        em.remove(entity);
     }
 }

@@ -21,7 +21,7 @@ public class SecurityFilter implements Filter{
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        // We need to check if the user is logged on or not, so first cehck we have a session
+        // We need to check if the user is logged on or not, so first check we have a session
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse res = (HttpServletResponse) servletResponse;
         HttpSession session = req.getSession(false);
@@ -49,7 +49,7 @@ public class SecurityFilter implements Filter{
             }
             else {
                 // Just route it on
-                filterChain.doFilter(servletRequest, servletResponse);
+                filterChain.doFilter( new SecurityRequestWrapper(req), servletResponse);
             }
         }
     }
