@@ -25,9 +25,6 @@ public class LoginController extends HttpServlet {
     @Inject
     private HtmlProducer uiProducer;
 
-    @Inject
-    private PersonService personService;
-
     @GET
     @Produces(MediaType.TEXT_HTML)
     @PermitAll
