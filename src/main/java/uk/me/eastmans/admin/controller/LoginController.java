@@ -1,9 +1,10 @@
-package uk.me.eastmans.admin.ui;
+package uk.me.eastmans.admin.controller;
 
 import uk.me.eastmans.admin.service.PersonService;
+import uk.me.eastmans.admin.view.HtmlProducer;
+import uk.me.eastmans.admin.view.SecurityFilter;
 
 import javax.inject.Inject;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

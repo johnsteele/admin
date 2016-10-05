@@ -1,4 +1,4 @@
-package uk.me.eastmans.admin.ui;
+package uk.me.eastmans.admin.view;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

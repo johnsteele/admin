@@ -1,4 +1,4 @@
-package uk.me.eastmans.admin.ui;
+package uk.me.eastmans.admin.view;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+import uk.me.eastmans.admin.view.HtmlProducer;
 
 import java.io.IOException;
 import java.util.Locale;

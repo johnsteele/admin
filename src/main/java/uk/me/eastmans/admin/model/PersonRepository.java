@@ -11,18 +11,9 @@ import javax.transaction.Transactional;
  * Created by markeastman on 03/10/2016.
  */
 @ApplicationScoped
-public class PersonRepository {
-
-    @PersistenceContext(unitName = "Admin") // default type is PersistenceContextType.TRANSACTION
-    private EntityManager em;
-
-    public void create(Person p)
+public class PersonRepository extends CRUDRepository<Person,Integer> {
+    public PersonRepository()
     {
-        em.persist(p);
-    }
-
-    public Person findWithId(Integer id)
-    {
-        return em.find(Person.class, id);
+        super(Person.class);
     }
 }
