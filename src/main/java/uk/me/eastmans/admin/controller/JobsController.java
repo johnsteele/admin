@@ -2,6 +2,8 @@ package uk.me.eastmans.admin.controller;
 
 import uk.me.eastmans.admin.view.HtmlProducer;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +26,7 @@ public class JobsController {
 
     @GET
     @Produces(MediaType.TEXT_HTML)
+    @RolesAllowed("ADMIN")
     public String home(@Context HttpServletRequest request, @Context HttpServletResponse response )
         throws IOException {
         Map model = new HashMap();

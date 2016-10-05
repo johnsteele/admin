@@ -4,6 +4,7 @@ import uk.me.eastmans.admin.service.PersonService;
 import uk.me.eastmans.admin.view.HtmlProducer;
 import uk.me.eastmans.admin.view.SecurityFilter;
 
+import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,7 @@ public class LoginController extends HttpServlet {
 
     @GET
     @Produces(MediaType.TEXT_HTML)
+    @PermitAll
     public String login(@Context HttpServletRequest request, @Context HttpServletResponse response)
             throws IOException {
 

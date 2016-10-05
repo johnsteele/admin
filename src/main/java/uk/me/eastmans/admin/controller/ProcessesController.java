@@ -2,6 +2,8 @@ package uk.me.eastmans.admin.controller;
 
 import uk.me.eastmans.admin.view.HtmlProducer;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,11 +27,10 @@ public class ProcessesController extends HttpServlet {
 
     @GET
     @Produces(MediaType.TEXT_HTML)
+    @RolesAllowed("ADMIN")
     public String login(@Context HttpServletRequest request, @Context HttpServletResponse response )
             throws IOException {
 
-        Map model = new HashMap();
-        model.put( "username", "Mark Eastman" );
-        return uiProducer.process(request,response, "processes", model);
+        return uiProducer.process(request,response, "processes");
     }
 }
