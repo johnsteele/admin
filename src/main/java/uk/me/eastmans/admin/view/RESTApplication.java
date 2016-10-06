@@ -8,4 +8,5 @@ import javax.ws.rs.core.Application;
  */
 @ApplicationPath("/app")
 public class RESTApplication extends Application {
+
 }

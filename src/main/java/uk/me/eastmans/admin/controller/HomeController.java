@@ -1,6 +1,7 @@
 package uk.me.eastmans.admin.controller;
 
 import uk.me.eastmans.admin.service.PersonService;
+import uk.me.eastmans.admin.service.UserMessageService;
 import uk.me.eastmans.admin.view.HtmlProducer;
 
 import javax.annotation.security.DenyAll;
@@ -17,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,7 +30,7 @@ public class HomeController {
     private HtmlProducer uiProducer;
 
     @Inject
-    private PersonService personService;
+    private UserMessageService  userMessageService;
 
     @GET
     @Produces(MediaType.TEXT_HTML)
@@ -38,16 +40,12 @@ public class HomeController {
             throws IOException {
 
         System.out.println( "++++ Is user in role " + securityContext.isUserInRole("ADMIN"));
-        checkDatabase();
 
         Map model = new HashMap();
-        model.put( "username", securityContext.getUserPrincipal().getName() );
-        return uiProducer.process(request,response, "home", model);
-    }
+        // Get the message for the logged in user
+        List messages = userMessageService.getMessagesForUser( 1L );
+        model.put( "userMessages", messages );
 
-    public void checkDatabase()
-    {
-        // Try out persistence
-        personService.test();
+        return uiProducer.process(request,response, "home", model);
     }
 }

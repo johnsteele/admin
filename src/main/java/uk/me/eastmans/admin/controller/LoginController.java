@@ -46,7 +46,8 @@ public class LoginController extends HttpServlet {
         if ("admin".equals(user) && "admin".equals(password)) {
             // All ok
             HttpSession session = request.getSession();
-            session.setAttribute(SecurityFilter.USER_KEY, user);
+            // Should lookup user really
+            session.setAttribute(SecurityFilter.USER_KEY, "Steve Welsh");
             response.sendRedirect("home");
             return null;
         } else {

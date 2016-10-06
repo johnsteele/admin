@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 public abstract class CRUDRepository<T,I> {
 
     @PersistenceContext(unitName = "Admin") // default type is PersistenceContextType.TRANSACTION
-    private EntityManager em;
+    protected EntityManager em;
 
     private Class entityType;
 

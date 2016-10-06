@@ -1,12 +1,9 @@
 package uk.me.eastmans.admin.service;
 
-import uk.me.eastmans.admin.model.Person;
-import uk.me.eastmans.admin.model.PersonRepository;
+import uk.me.eastmans.admin.model.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 /**
@@ -18,16 +15,16 @@ public class PersonService {
     @Inject
     private PersonRepository personRepository;
 
-
     @Transactional
     public void test()
     {
         Person person = new Person();
-        person.setFirstName("ana");
+        person.setName("ana");
         personRepository.create(person);
         System.out.println("ana has id " + person.getId());
 
-        Person p = personRepository.read(1);
-        System.out.println("Person with id=1 is " + p.getFirstName());
+        Person p = personRepository.read(1L);
+        System.out.println("Person with id=1 is " + p.getName());
     }
+
 }

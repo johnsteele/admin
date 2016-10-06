@@ -22,16 +22,13 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle nav-item-iconic" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <span title="Notifications" class="fa pficon-flag"></span>
-                            <span class="badge">2</span>
+                            <span class="badge" th:text="${userMessages.size}">0</span>
                         </a>
                         <div class="dropdown-menu infotip bottom-right">
                             <div class="arrow"></div>
-                            <ul class="list-group">
+                            <ul class="list-group" th:each="msg : ${userMessages}">
                                 <li class="list-group-item">
-                                    <span class="i pficon pficon-info"></span> Modified Datasources ExampleDS
-                                </li>
-                                <li class="list-group-item">
-                                    <span class="i pficon pficon-info"></span> Error: System Failure
+                                    <span class="i pficon pficon-info"></span><span th:text="${msg.message}">Example message</span>
                                 </li>
                             </ul>
                             <div class="footer">

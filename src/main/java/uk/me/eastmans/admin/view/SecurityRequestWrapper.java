@@ -31,7 +31,7 @@ public class SecurityRequestWrapper extends HttpServletRequestWrapper {
     {
         @Override
         public String getName() {
-            return "admin";
+            return "Steve Welsh";
         }
     }
 }
