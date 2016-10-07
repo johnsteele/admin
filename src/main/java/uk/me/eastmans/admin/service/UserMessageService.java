@@ -36,4 +36,10 @@ public class UserMessageService {
     {
         return userMessageRepository.getMessagesForUser( userId );
     }
+
+    @Transactional
+    public void clearMessages( Long userId, Long maxId )
+    {
+        userMessageRepository.clearMessages( userId, maxId );
+    }
 }

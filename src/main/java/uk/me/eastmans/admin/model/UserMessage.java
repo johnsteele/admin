@@ -1,6 +1,7 @@
 package uk.me.eastmans.admin.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class UserMessage {
@@ -17,6 +18,9 @@ public class UserMessage {
 
     @Column
     private String message;
+
+    @Column
+    private Date whenSent = new Date();
 
     @Enumerated(EnumType.STRING)
     private UserMessageClassification classification;
@@ -51,6 +55,14 @@ public class UserMessage {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Date getWhenSent() {
+        return whenSent;
+    }
+
+    public void setWhenSent(Date whenSent) {
+        this.whenSent = whenSent;
     }
 
     public UserMessageClassification getClassification() {

@@ -22,8 +22,12 @@ public class DashboardApplication {
     private UserMessageRepository userMessageRepository;
 
     @PostConstruct
+    void initialise() {
+        initDatabase();
+    }
+
     @Transactional
-    void initialise()
+    private void initDatabase()
     {
         // We need to create some dummy data
         Person user = new Person();

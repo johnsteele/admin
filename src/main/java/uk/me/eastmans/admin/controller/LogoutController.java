@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by markeastman on 26/09/2016.
  */
 @Path("logout")
-public class LogoutController extends HttpServlet {
+public class LogoutController  {
     @Inject
     private HtmlProducer uiProducer;
 

@@ -22,17 +22,19 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle nav-item-iconic" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             <span title="Notifications" class="fa pficon-flag"></span>
-                            <span class="badge" th:text="${userMessages.size}">0</span>
+                            <span id="messagesBadge" class="badge" th:text="${userMessages.size > 0 ? userMessages.size : '' }">1</span>
                         </a>
                         <div class="dropdown-menu infotip bottom-right">
                             <div class="arrow"></div>
-                            <ul class="list-group" th:each="msg : ${userMessages}">
-                                <li class="list-group-item">
+                            <ul id="messagesList" class="list-group" >
+                                <li class="list-group-item" th:each="msg : ${userMessages}">
                                     <span class="i pficon pficon-info"></span><span th:text="${msg.message}">Example message</span>
                                 </li>
+                                <input class="maxMessageId" type="hidden" th:if="${userMessages.size > 0}" th:value="${userMessages[0].id}"/>
+                                <input class="maxMessageId" type="hidden" th:if="${userMessages.size == 0}" value="-1" />
                             </ul>
                             <div class="footer">
-                                <a>Clear Messages</a>
+                                <a onclick="javascript:clearMessages();">Clear Messages</a>
                             </div>
                         </div>
                     </li>

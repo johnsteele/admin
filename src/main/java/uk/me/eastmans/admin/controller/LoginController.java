@@ -21,7 +21,7 @@ import java.util.Map;
  * Created by markeastman on 26/09/2016.
  */
 @Path("login")
-public class LoginController extends HttpServlet {
+public class LoginController  {
     @Inject
     private HtmlProducer uiProducer;
 

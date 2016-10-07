@@ -21,3 +21,6 @@ We use JPA to connect to the database which is defined via a JNDI lookup. In fac
 If we were using spring-data their repository concepts are very good but as we are not using spring at all I want to see if we can 
 provide a fairly simple approach to the entity objects. Some of this might depend oon the type of entities and queries likely to be invoked 
 by the dashboard.
+
+I have created a DashboardApplication that runs once at the startup of the application and inits the database.
+I also have a single RESTApplication that defines the "/app" context for RESTEasy processing of the JAX-RS annotations

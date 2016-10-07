@@ -16,9 +16,17 @@ public class UserMessageRepository extends CRUDRepository<UserMessage,Long> {
 
     public List getMessagesForUser(Long userId )
     {
-        Query query = em.createQuery("SELECT m FROM UserMessage m WHERE m.forWho.id = :userId and read = 0");
+        Query query = em.createQuery("SELECT m FROM UserMessage m WHERE m.forWho.id = :userId AND read = 0 ORDER BY id DESC");
         query.setParameter("userId", userId);
         return query.getResultList();
+    }
+
+    public void clearMessages( Long userId, Long maxId )
+    {
+        Query query = em.createQuery("UPDATE UserMessage m SET m.read = 1 WHERE m.forWho.id = :userId AND m.id <= :maxId");
+        query.setParameter("userId", userId);
+        query.setParameter("maxId", maxId);
+        query.executeUpdate();
     }
 
 }
