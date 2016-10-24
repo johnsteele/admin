@@ -42,14 +42,14 @@ public class SecurityFilter implements Filter{
         {
             // Check to see if we have logged in yet
             Object user = session.getAttribute(USER_KEY);
-            if (user == null)
+            if (user == null || !(user instanceof LoggedInUserPrincipal))
             {
                 // we are not logged in so show log in screen
                 res.sendRedirect("/app/login");
             }
             else {
                 // Just route it on
-                filterChain.doFilter( new SecurityRequestWrapper(req), servletResponse);
+                filterChain.doFilter( new SecurityRequestWrapper(req,(LoggedInUserPrincipal) user), servletResponse);
             }
         }
     }

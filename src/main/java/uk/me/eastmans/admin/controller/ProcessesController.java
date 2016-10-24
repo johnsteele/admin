@@ -21,16 +21,13 @@ import java.util.Map;
  * Created by markeastman on 26/09/2016.
  */
 @Path("processes")
-public class ProcessesController  {
-    @Inject
-    private HtmlProducer uiProducer;
-
+public class ProcessesController extends BaseController {
     @GET
     @Produces(MediaType.TEXT_HTML)
     @RolesAllowed("ADMIN")
-    public String login(@Context HttpServletRequest request, @Context HttpServletResponse response )
+    public String login()
             throws IOException {
 
-        return uiProducer.process(request,response, "processes");
+        return processUI("processes");
     }
 }

@@ -20,17 +20,12 @@ import java.util.Map;
  * Created by markeastman on 26/09/2016.
  */
 @Path("jobs")
-public class JobsController {
-    @Inject
-    private HtmlProducer uiProducer;
-
+public class JobsController extends BaseController {
     @GET
     @Produces(MediaType.TEXT_HTML)
     @RolesAllowed("ADMIN")
-    public String home(@Context HttpServletRequest request, @Context HttpServletResponse response )
+    public String home()
         throws IOException {
-        Map model = new HashMap();
-        model.put( "username", "Mark Eastman" );
-        return uiProducer.process(request,response, "jobs", model);
+        return processUI("jobs");
     }
 }

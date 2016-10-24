@@ -11,7 +11,7 @@ public class UserMessage {
     private Long id;
 
     @ManyToOne
-    private Person forWho;
+    private User forWho;
 
     @Column
     private boolean read;
@@ -41,11 +41,11 @@ public class UserMessage {
         this.read = read;
     }
 
-    public Person getForWho() {
+    public User getForWho() {
         return forWho;
     }
 
-    public void setForWho(Person forWho) {
+    public void setForWho(User forWho) {
         this.forWho = forWho;
     }
 

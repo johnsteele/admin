@@ -1,4 +1,4 @@
-package uk.me.eastmans.admin.util;
+package uk.me.eastmans.admin.bootstrap;
 
 import uk.me.eastmans.admin.model.*;
 
@@ -16,7 +16,7 @@ import javax.transaction.Transactional;
 public class DashboardApplication {
 
     @Inject
-    private PersonRepository personRepository;
+    private UserRepository userRepository;
 
     @Inject
     private UserMessageRepository userMessageRepository;
@@ -30,10 +30,12 @@ public class DashboardApplication {
     private void initDatabase()
     {
         // We need to create some dummy data
-        Person user = new Person();
+        User user = new User();
         user.setName("Steve Welsh");
+        user.setLoginName("admin");
+        user.setPassword("admin");
 
-        personRepository.create(user);
+        userRepository.create(user);
 
         UserMessage msg1 = new UserMessage();
         msg1.setForWho(user);
@@ -46,6 +48,14 @@ public class DashboardApplication {
         msg2.setClassification(UserMessageClassification.WARNING);
         msg2.setMessage("Will be deleted at destroy time");
         userMessageRepository.create(msg2);
+
+        User user2 = new User();
+        user2.setName("Mark Eastman");
+        user2.setLoginName("me");
+        user2.setPassword("me");
+
+        userRepository.create(user2);
+
     }
 
 }

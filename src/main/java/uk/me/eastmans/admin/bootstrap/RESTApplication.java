@@ -1,4 +1,4 @@
-package uk.me.eastmans.admin.util;
+package uk.me.eastmans.admin.bootstrap;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

@@ -2,7 +2,6 @@ package uk.me.eastmans.admin.view;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import java.nio.file.attribute.UserPrincipal;
 import java.security.Principal;
 
 /**
@@ -10,28 +9,25 @@ import java.security.Principal;
  */
 public class SecurityRequestWrapper extends HttpServletRequestWrapper {
 
-    public SecurityRequestWrapper(HttpServletRequest request)
+    private LoggedInUserPrincipal principal;
+
+    public SecurityRequestWrapper(HttpServletRequest request, LoggedInUserPrincipal principal)
     {
         super(request);
+        this.principal = principal;
     }
 
     @Override
     public Principal getUserPrincipal() {
-        return new UserPrincipal(); // We should get this from the database
+        return principal;
     }
 
     @Override
     public boolean isUserInRole(String role)
     {
-        return true; // We should get this from the database
+        // Need to check from LoggedInUserPrincipal
+        return principal.isUserInRole(role);
     }
 
 
-    static class UserPrincipal implements Principal
-    {
-        @Override
-        public String getName() {
-            return "Steve Welsh";
-        }
-    }
 }

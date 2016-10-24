@@ -1,15 +1,16 @@
 package uk.me.eastmans.admin.controller;
 
-import uk.me.eastmans.admin.service.PersonService;
-import uk.me.eastmans.admin.view.HtmlProducer;
+import uk.me.eastmans.admin.model.User;
+import uk.me.eastmans.admin.service.UserService;
+import uk.me.eastmans.admin.view.LoggedInUserPrincipal;
 import uk.me.eastmans.admin.view.SecurityFilter;
 
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -21,39 +22,39 @@ import java.util.Map;
  * Created by markeastman on 26/09/2016.
  */
 @Path("login")
-public class LoginController  {
+public class LoginController extends BaseController  {
+
     @Inject
-    private HtmlProducer uiProducer;
+    private UserService userService;
 
     @GET
     @Produces(MediaType.TEXT_HTML)
     @PermitAll
-    public String login(@Context HttpServletRequest request, @Context HttpServletResponse response)
+    public String login()
             throws IOException {
 
-        return uiProducer.process(request, response, "login");
+        return processUI("login");
     }
 
     @POST
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public String loginAttempt(@FormParam("username") String user, @FormParam("password") String password,
+    public String loginAttempt(@NotNull @FormParam("username") String name, @NotNull @FormParam("password") String password,
                                @Context HttpServletRequest request, @Context HttpServletResponse response)
             throws IOException {
 
-        System.out.println("User and password " + user + "," + password);
-
-        if ("admin".equals(user) && "admin".equals(password)) {
+        User user = userService.getUserWithLogin(name,password);
+        if (user != null) {
             // All ok
             HttpSession session = request.getSession();
             // Should lookup user really
-            session.setAttribute(SecurityFilter.USER_KEY, "Steve Welsh");
+            session.setAttribute(SecurityFilter.USER_KEY, new LoggedInUserPrincipal(user));
             response.sendRedirect("home");
             return null;
         } else {
             Map errors = new HashMap();
             errors.put("authenticationError", "invalid user or password");
-            return uiProducer.process(request, response, "login", errors);
+            return processUI("login", errors);
         }
     }
 }

@@ -14,7 +14,7 @@ import java.util.List;
 public class UserMessageService {
 
     @Inject
-    private PersonRepository personRepository;
+    private UserRepository userRepository;
 
     @Inject
     private UserMessageRepository userMessageRepository;
@@ -22,7 +22,7 @@ public class UserMessageService {
     @Transactional
     public void sendMessageToUser(Long userId, UserMessageClassification classification, String text)
     {
-        Person p = personRepository.read(userId);
+        User p = userRepository.read(userId);
 
         UserMessage message = new UserMessage();
         message.setForWho( p );
