@@ -71,8 +71,7 @@ public class FormEntityController extends BaseController {
         model.put("authenticationError", "invalid user or password");
         return uiProducer.process(request, response, "form", model);
     } */
-    public String formCreate( MultivaluedMap<String,Object> form
-                              )
+    public String formCreate( MultivaluedMap<String,Object> form )
             throws IOException {
         // We want to handle errors and then also process the form if none exist
 
