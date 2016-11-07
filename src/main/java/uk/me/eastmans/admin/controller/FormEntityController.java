@@ -1,30 +1,40 @@
 package uk.me.eastmans.admin.controller;
 
-import uk.me.eastmans.admin.forms.FormEntityForm;
-import uk.me.eastmans.admin.model.FormEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
+/**
+ * Created by markeastman on 26/09/2016.
+ */
+@Controller
+public class FormEntityController {
+
+    @GetMapping("/form")
+    public String index(Model model) {
+        return "form";
+    }
+}
+
+/*
+package uk.me.eastmans.admin.controller;
+
 import uk.me.eastmans.admin.service.UserMessageService;
-import uk.me.eastmans.admin.view.HtmlProducer;
-import uk.me.eastmans.admin.view.SecurityFilter;
 
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-/**
- * Created by markeastman on 26/09/2016.
- */
+
 @Path("form")
 public class FormEntityController extends BaseController {
 
@@ -40,37 +50,6 @@ public class FormEntityController extends BaseController {
         return processUI("form");
     }
 
-    @POST
-    @Produces(MediaType.TEXT_HTML)
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    /*
-    public String formCreate( @FormParam("moreThanOrEqual10") Integer moreThanOrEqual10,
-                              @FormParam("lessThanOrEqual100") Integer lessThanOrEqual100,
-                             @Context HttpServletRequest request, @Context HttpServletResponse response)
-            throws IOException {
-
-        System.out.println("We have form " + moreThanOrEqual10 + " " + lessThanOrEqual100 );
-
-        Map model = new HashMap();
-        List messages = userMessageService.getMessagesForUser( 1L );
-        model.put( "userMessages", messages );
-        model.put("authenticationError", "invalid user or password");
-        return uiProducer.process(request, response, "form", model);
-    }
-    */
-    /*
-    public String formCreate( @BeanParam FormEntityForm formEntity,
-                             @Context HttpServletRequest request, @Context HttpServletResponse response)
-            throws IOException {
-
-        System.out.println("We have form " + formEntity.moreThanOrEqual10 + " " + formEntity.lessThanOrEqual100 );
-
-        Map model = new HashMap();
-        List messages = userMessageService.getMessagesForUser( 1L );
-        model.put( "userMessages", messages );
-        model.put("authenticationError", "invalid user or password");
-        return uiProducer.process(request, response, "form", model);
-    } */
     public String formCreate( MultivaluedMap<String,Object> form )
             throws IOException {
         // We want to handle errors and then also process the form if none exist
@@ -89,3 +68,4 @@ public class FormEntityController extends BaseController {
         return processUI("form", model);
     }
 }
+*/

@@ -1,71 +1,35 @@
 package uk.me.eastmans.admin.controller;
 
-import uk.me.eastmans.admin.service.UserMessageService;
-import uk.me.eastmans.admin.view.HtmlProducer;
-import uk.me.eastmans.admin.view.LoggedInUserPrincipal;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import uk.me.eastmans.admin.domain.UserMessage;
+import uk.me.eastmans.admin.repositories.UserMessageRepository;
+import uk.me.eastmans.admin.services.CurrentUser;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.SecurityContext;
-import java.io.IOException;
-import java.security.Principal;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Created by markeastman on 21/10/2016.
+ * Created by markeastman on 07/11/2016.
  */
+@Controller
 public class BaseController {
-    @Inject
-    private HtmlProducer uiProducer;
+    @Autowired
+    private UserMessageRepository userMessageRepository;
 
-    @Inject
-    private UserMessageService userMessageService;
-
-    private @Context
-    HttpServletRequest request;
-
-    private @Context
-    HttpServletResponse response;
-
-    private @Context
-    SecurityContext securityContext;
-
-    protected String processUI(String templateName) throws IOException
+    @ModelAttribute("userMessages")
+    public List<UserMessage> userMessages()
     {
-        // Need to always have a model
-        Map model = new HashMap();
-        return processUI( templateName, model);
-    }
-
-    protected String processUI(String templateName, Map model) throws IOException
-    {
-        // Need to process some common attributes for all screens
-        System.out.println("request = " + request);
-        preProcessUI(model);
-        return uiProducer.process( request, response, templateName, model);
-    }
-
-    protected UserMessageService getUserMessageService()
-    {
-        return userMessageService;
-    }
-
-    private void preProcessUI( Map model )
-    {
-        // Get the logged in user
-        Principal user = securityContext.getUserPrincipal();
-        if (user instanceof LoggedInUserPrincipal) {
-            LoggedInUserPrincipal principal = (LoggedInUserPrincipal) user;
-            List messages = userMessageService.getMessagesForUser(principal.getId());
-            model.put("userMessages", messages);
+        List<UserMessage> result = Collections.EMPTY_LIST;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null)
+        {
+            CurrentUser user = (CurrentUser)auth.getPrincipal();
+            result = userMessageRepository.findMessagesForUser(user.getId());
         }
-        // Put out the user name of we are logged in
-        Principal principal = securityContext.getUserPrincipal();
-        if (principal != null)
-            model.put( "username", principal.getName() );
+        return result;
     }
 }

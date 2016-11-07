@@ -3,6 +3,7 @@
 To run the project we use maven
 
 We are going to change the pure wildfly project into a springboot project now
+
 mvn package
 mvn wildfly:run
 

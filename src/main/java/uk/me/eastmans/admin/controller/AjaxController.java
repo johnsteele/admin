@@ -1,40 +1,37 @@
 package uk.me.eastmans.admin.controller;
 
-import uk.me.eastmans.admin.service.UserMessageService;
-import uk.me.eastmans.admin.view.HtmlProducer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import uk.me.eastmans.admin.repositories.UserMessageRepository;
+import uk.me.eastmans.admin.services.CurrentUser;
+import uk.me.eastmans.admin.services.UserMessageService;
 
-import javax.annotation.security.RolesAllowed;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.SecurityContext;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
 
 /**
  * Created by markeastman on 26/09/2016.
  */
-@Path("/")
+@Controller
 public class AjaxController {
-    @Inject
-    private HtmlProducer uiProducer;
+    @Autowired
+    private UserMessageService userMessageService;
 
-    @Inject
-    private UserMessageService  userMessageService;
-
-    @POST
-    @Path("clearMessages/{maxId}")
-    @RolesAllowed("ADMIN")
-    public void home(@PathParam("maxId") Long maxId,
-                     @Context HttpServletRequest request, @Context HttpServletResponse response,
-                     @Context SecurityContext securityContext)
-            throws IOException {
-
-        userMessageService.clearMessages( 1L, maxId );
+    @PostMapping(path = "/clearMessages/{maxId}", produces = MediaType.TEXT_PLAIN_VALUE)
+    @ResponseBody
+    public String index(@PathVariable Long maxId, Authentication auth) {
+        if (auth != null)
+        {
+            CurrentUser user = (CurrentUser)auth.getPrincipal();
+            userMessageService.clearMessagesForUser(user.getId(), maxId);
+        }
+        return "done";
     }
 }

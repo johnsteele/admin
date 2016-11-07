@@ -1,6 +1,6 @@
 package uk.me.eastmans.admin.view;
 
-import uk.me.eastmans.admin.model.User;
+import uk.me.eastmans.admin.domain.User;
 
 import java.security.Principal;
 
