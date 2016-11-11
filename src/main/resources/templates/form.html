@@ -6,85 +6,76 @@
 <body>
 <!-- Insert content into the layouts/master.html -->
 <th:block layout:fragment="content">
+    <div class="row row-cards-pf">
 
-    <h1>Page header - A Form with errors</h1>
-    <div class="alert alert-danger">
-        <div class="row">
-            <span class="pficon pficon-error-circle-o"></span>
-            <strong>Hey there is a problem!</strong> Yeah this is really messed up and you should <a href="#" class="alert-link">know about it</a>.
-        </div>
-        <div class="row">
-            <span class="pficon pficon-error-circle-o"></span>
-            <strong>Hey there is a problem!</strong> Yeah this is really messed up and you should <a href="#" class="alert-link">know about it</a>.
-        </div>
-    </div>
+        <h1>Page header - A Form with errors</h1>
 
-    <form class="form-horizontal" role="form" action="form" method="post">
-        <input type="hidden" id="version" value="9" />
-        <!--div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Email" />
-            </div>
-        </div>
-        <div class="form-group has-error">
-            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword3" placeholder="Password"/>
-                <span class="help-block">Please correct the error</span>
-            </div>
-        </div-->
-        <div class="form-group">
-            <label for="moreThanOrEqual10" class="col-sm-2 control-label">Min(10)</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="moreThanOrEqual10" name="moreThanOrEqual10" placeholder="10"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="lessThanOrEqual100" class="col-sm-2 control-label">Max(100)</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="lessThanOrEqual100" name="lessThanOrEqual100" placeholder="100"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="sizeBetween6and10" class="col-sm-2 control-label">Between 6 and 10</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="sizeBetween6and10" placeholder="8"/>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="futureDate" class="col-sm-2 control-label">Future</label>
-            <div class="col-sm-10">
-                <div class="input-group date" id="date-future">
-                    <input type="text" class="form-control bootstrap-datepicker" readonly="true" id="futureDate" />
-                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+
+        <form class="form-horizontal" role="form" th:object="${formEntityForm}" action="form" method="post">
+            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                <div th:each="e : ${#fields.errors('*')}" class="row">
+                    <span class="pficon pficon-error-circle-o"></span>
+                    <span th:text="${e}">Some error</span>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="pastDate" class="col-sm-2 control-label">Past</label>
-            <div class="col-sm-10">
-                <div class="input-group date" id="date-past">
-                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                    <input type="text" class="form-control bootstrap-datepicker" readonly="true" id="pastDate" />
+            <input type="hidden" id="version" value="9" th:field="*{id}" />
+            <div class="form-group">
+                <label for="notNull" class="col-sm-2 control-label">Not Null</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="notNull" name="notNull" th:field="*{notNull}"/>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"/> Remember me
-                    </label>
+            <div class="form-group">
+                <label for="moreThanOrEqual10" class="col-sm-2 control-label">Min(10)</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="moreThanOrEqual10" name="moreThanOrEqual10" placeholder="10" th:field="*{moreThanOrEqual10}"/>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">Create</button>
+            <div class="form-group">
+                <label for="lessThanOrEqual100" class="col-sm-2 control-label">Max(100)</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="lessThanOrEqual100" name="lessThanOrEqual100" placeholder="100" th:field="*{lessThanOrEqual100}"/>
+                </div>
             </div>
-        </div>
-    </form>
+            <div class="form-group">
+                <label for="sizeBetween6and10" class="col-sm-2 control-label">Between 6 and 10</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="sizeBetween6and10" placeholder="8" th:field="*{sizeBetween6and10}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="futureDate" class="col-sm-2 control-label">Future</label>
+                <div class="col-sm-10">
+                    <div class="input-group date" id="date-future">
+                        <input type="text" class="form-control bootstrap-datepicker" readonly="true" id="futureDate" th:field="*{futureDate}"/>
+                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pastDate" class="col-sm-2 control-label">Past</label>
+                <div class="col-sm-10">
+                    <div class="input-group date" id="date-past">
+                        <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                        <input type="text" class="form-control bootstrap-datepicker" readonly="true" id="pastDate" th:field="*{pastDate}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox"/> Remember me
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </form>
     </div>
     <script src="../js/bootstrap-datepicker.js"></script>
     <script>

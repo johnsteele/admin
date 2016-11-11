@@ -44,7 +44,7 @@
         <thymeleaf-extras-springsecurity4.version>3.0.0.RELEASE</thymeleaf-extras-springsecurity4.version>
         <thymeleaf-layout-dialect.version>2.0.1</thymeleaf-layout-dialect.version>
         <assertj.version>3.5.2</assertj.version>
-        <tomcat.version>8.0.18</tomcat.version>
+
     </properties>
 
     <!-- Add typical dependencies for a web application -->
@@ -118,4 +118,27 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>tomcat</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>jws31</id>
+            <properties>
+                <tomcat.version>8.0.36.redhat-13</tomcat.version>
+            </properties>
+            <repositories>
+                <repository>
+                    <id>jws31</id>
+                    <name>JWS 3.1 Repository</name>
+                    <url>http://download-node-02.eng.bos.redhat.com/brewroot/repos/jws-3.1-rhel-7-build/latest/maven</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
 </project>

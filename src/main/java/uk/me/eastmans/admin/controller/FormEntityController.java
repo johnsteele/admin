@@ -2,7 +2,14 @@ package uk.me.eastmans.admin.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import uk.me.eastmans.admin.forms.FormEntityForm;
+
+import javax.validation.Valid;
 
 
 /**
@@ -12,8 +19,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class FormEntityController {
 
     @GetMapping("/form")
-    public String index(Model model) {
+    public String index(Model model)
+    {
+        FormEntityForm formEntityForm = new FormEntityForm();
+        formEntityForm.moreThanOrEqual10 = 13;
+        model.addAttribute( "formEntityForm", formEntityForm );
         return "form";
+    }
+
+    @PostMapping("/form")
+    public String createFormEntity(@Valid @ModelAttribute FormEntityForm formEntityForm, BindingResult errors)
+    {
+        if (errors.hasErrors()) {
+            FieldError error = new FieldError("pbjectName", "fieldName", new Long(12), false, new String[] {"C1"}, new String[] {"p1"}, "Code error {0}");
+            errors.addError( error );
+            System.out.println( "Errors: " + errors );
+            return "form";
+        }
+        return "redirect:/home";
     }
 }
 
