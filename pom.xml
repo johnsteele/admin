@@ -101,12 +101,6 @@
             <version>2.53.0</version>
             <scope>test</scope>
         </dependency>
-        <!-- Provided (for embedded war support) -->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.boot</groupId>-->
-        <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
-        <!--<scope>provided</scope>-->
-        <!--</dependency>-->
     </dependencies>
 
     <!-- Package as an executable jar -->

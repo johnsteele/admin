@@ -15,19 +15,21 @@ public class FormEntityForm {
 
     @Min(
             value = 10,
-            message = "The value must be at least {min}"
+            message = "The value must be at least {value}"
     )
     public Integer moreThanOrEqual10;
 
     @Max(
             value = 100,
-            message = "The value must be no more than {max}"
+            message = "The value must be no more than {value}"
     )
     public Integer lessThanOrEqual100;
 
+    @
     @Future
     private Date futureDate;
 
+    @Null
     @Past
     private Date pastDate;
 
