@@ -25,7 +25,6 @@ public class FormEntityForm {
     )
     public Integer lessThanOrEqual100;
 
-    @
     @Future
     private Date futureDate;
 
