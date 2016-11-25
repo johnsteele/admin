@@ -78,6 +78,10 @@
             <artifactId>h2</artifactId>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jolokia</groupId>
+            <artifactId>jolokia-core</artifactId>
+        </dependency>
         <!-- WebJars -->
         <dependency>
             <groupId>org.webjars</groupId>
