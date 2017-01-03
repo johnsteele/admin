@@ -457,21 +457,6 @@
     $(".row-cards-pf > [class*='col'] > .card-pf > .card-pf-footer").matchHeight();
     $(".row-cards-pf > [class*='col'] > .card-pf").matchHeight();
 
-    $("input[type='checkbox']").change(function (e) {
-      if ($(this).is(":checked")) {
-        $(this).closest('.list-group-item').addClass("active");
-      } else {
-        $(this).closest('.list-group-item').removeClass("active");
-      }
-    });
-    // toggle dropdown menu
-    $('.list-view-pf-actions').on('show.bs.dropdown', function () {
-      var $this = $(this);
-      var $dropdown = $this.find('.dropdown');
-      var space = $(window).height() - $dropdown[0].getBoundingClientRect().top - $this.find('.dropdown-menu').outerHeight(true);
-      $dropdown.toggleClass('dropup', space < 10);
-    });
-
     // Initialize the vertical navigation
     $().setupVerticalNavigation(true);
   });
