@@ -93,6 +93,11 @@
             <artifactId>jquery</artifactId>
             <version>2.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -113,6 +118,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <addResources>true</addResources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -126,7 +134,7 @@
         </profile>
 
         <profile>
-            <id>openshiftx</id>
+            <id>openshift</id>
             <properties>
                 <tomcat.version>8.0.36.redhat-13</tomcat.version>
             </properties>
@@ -134,7 +142,7 @@
                 <repository>
                     <id>jws31</id>
                     <name>JWS 3.1 Repository</name>
-                    <url>http://download-node-02.eng.bos.redhat.com/brewroot/repos/jws-3.1-rhel-7-build/latest/maven</url>
+                    <url>https://maven.repository.redhat.com/earlyaccess/all</url>
                 </repository>
             </repositories>
         </profile>
