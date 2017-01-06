@@ -10,7 +10,7 @@ mvn wildfly:run
 this will download the wildfly system for you if you do not have one. If you have a wildfly system then you can change the pom
 and wildfly plugin definition to reflect where your wildfly is.
 
-You can connect to the server using http://localhost:7070 and you will be presented with a landing page, click the link and you will be 
+You can connect to the server using http://localhost:8778 and you will be presented with a landing page, click the link and you will be
 presented with a mock up of the dashboard.
 
 I have added security and a login page at the moment but the validation is hardcoded to admin/admin at the moment. After all this
