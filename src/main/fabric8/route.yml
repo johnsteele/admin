@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: sb-pf-route
+spec:
+  port:
+    targetPort: 8090
+  to:
+    kind: Service
+    name: sb-pf-svc
